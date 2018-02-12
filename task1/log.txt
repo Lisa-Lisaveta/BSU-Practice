@@ -1,0 +1,15 @@
+
+C:\Users\Домашний\Documents\4 семестр\BSU-practice>git log
+commit ca642a7d90ea913b38bf69251f5990b7d6eae70e (HEAD -> master)
+Author: Lizaveta <l.manzhulina@gmail.com>
+Date:   Mon Feb 12 16:39:29 2018 +0300
+
+    add task1\status.txt
+
+commit a5029127001e8d19cc4e6974a0a9572f2d921834
+Author: Lizaveta <l.manzhulina@gmail.com>
+Date:   Mon Feb 12 16:36:05 2018 +0300
+
+    add .gitignore
+
+C:\Users\Домашний\Documents\4 семестр\BSU-practice>
