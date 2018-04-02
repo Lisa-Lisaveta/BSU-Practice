@@ -1,0 +1,76 @@
+body{
+    font-family: Constantia;
+}
+
+
+#search-panel{
+    margin: 200px;
+    display:inline-block;
+}
+
+
+button,.go-button{
+    border-radius: 5px;
+    background-color: lightgrey;
+    border: hidden;
+    font-family: Constantia;
+}
+
+
+.add-button{
+    display: inline-block;
+    margin: 100px;
+    width: 200px;
+    height: 200px;
+}
+
+.go-button, .show-more-button{
+    margin-left: 40%;
+}
+
+
+#all-posts{
+clear: both;
+}
+
+
+.post{
+    display: inline-block;
+    padding: 100px 100px;
+}
+
+
+.photo{
+    width: 252px;
+    height: 383px;
+}
+
+
+.post-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.like{
+    background-color: white;
+    border: hidden;
+}
+
+
+header{
+    top:0px;
+    width: 95%;
+    display: block;
+    position: fixed;
+    text-align: right;
+    background-color: white;
+}
+
+
+#logo{
+    padding-right: 40%;
+    font-family: "Britannic Bold";
+}
+
+
