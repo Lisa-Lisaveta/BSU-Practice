@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>ShowIt - Add/Edit page</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <script src="postsFunctions.js"></script>
+
+    <header>
+        <span id="logo">ShowIt</span>
+        <button id="authorization-button"><i class="fas fa-sign-out-alt"></i></button>
+        <hr>
+    </header>
+
+    <div class="post">
+        <div class="post-info">
+            <input id="photo-link" placeholder="Put in your photo link">
+            </input>
+        </div>
+        <img src="trees.jpg" class="photo">
+        <div>
+            <textarea name="hashtags" id="hashtags">#hashtag</textarea>
+            <div>
+                <textarea name="description" id="description"> Description</textarea>
+            </div>
+        </div>
+        <button id="add-button">Add</button>
+    </div>
+
+    <script>
+        lizzy.showHeader()
+
+        document.getElementById("authorization-button").addEventListener('click', inOrOut)
+        function inOrOut() {
+            localStorage.removeItem("user")
+            location.href = "index.html"
+        }
+        document.getElementById("add-button").addEventListener('click', addPost)
+
+        function addPost() {
+            if (JSON.parse(localStorage.getItem("addOrEdit"))) {
+                var postToAdd = {}
+                postToAdd.id = JSON.parse(localStorage.getItem("nextId")).toString()
+                postToAdd.author = JSON.parse(localStorage.getItem("user"))
+                postToAdd.createdAt = new Date()
+                postToAdd.description = document.getElementById("description").value
+                postToAdd.photoLink = document.getElementById("photo-link").value ? document.getElementById("photo-link").value :
+                    "bridge.jpg"
+                if (lizzy.addPhotoPost(postToAdd)) {
+                    localStorage.removeItem("addOrEdit")
+                    location.href = "index.html"
+                }
+            } 
+            else {
+
+                var photoPost = JSON.parse(localStorage.getItem("postToEdit"));
+                photoPost.author = JSON.parse(localStorage.getItem("user"))
+                photoPost.description = document.getElementById("description").value
+                photoPost.photoLink = "trees.jpg"
+
+                localStorage.removeItem("postToEdit")
+                localStorage.setItem("postToEdit", JSON.stringify(photoPost))
+
+                if (lizzy.editPhotoPost(photoPost.id, photoPost)) {
+                    localStorage.removeItem("addOrEdit")
+                    location.href = "index.html"
+                }
+            }
+
+        }
+    </script>
+
+    <footer>
+        <hr>
+        <p style="display:inline-block">
+            ShowIt
+            <br> 26.02.2018
+        </p>
+        <p style="display:inline-block; float:right">
+            Lizaveta Manzhulina, FAMCS, BSU, 2 course, group 5
+            <br> l.manzhulina@gmail.com
+        </p>
+    </footer>
+</body>
+</html>
