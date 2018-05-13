@@ -1,8 +1,6 @@
 *.iml
-
 .DS_Store/
-
 .idea/
-
 out/
 node_modules/
+.vscode/
