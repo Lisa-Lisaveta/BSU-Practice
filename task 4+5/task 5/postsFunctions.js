@@ -1,5 +1,6 @@
-;var lizzy = (function () {
-    var photoPosts = [
+;
+var lizzy = (function() {
+    const photoPosts = [
 
         {
 
@@ -76,7 +77,7 @@
 
             author: 'Аркадий',
 
-            photoLink:  'https://static.kulturologia.ru/files/u18476/emerging-artists-6.jpg'
+            photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-6.jpg'
 
         },
         {
@@ -195,7 +196,7 @@
 
             photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-15.jpg'
 
-        },        {
+        }, {
 
             id: '16',
 
@@ -263,205 +264,193 @@
 
 
     ];
-  //JS
+    //JS
 
-    function getPhotoPosts(skip, top, filterConfig){
-
-        var postsSegment = photoPosts;
-
-        if(filterConfig !== undefined && filterConfig.author !== undefined){
-            postsSegment = postsSegment.filter(function (post) { return post.author===filterConfig.author });
+    function getPhotoPosts(skip, top, filterConfig) {
+        const postsSegment = photoPosts;
+        if (filterConfig && filterConfig.author) {
+            postsSegment = postsSegment.filter(function(post) {
+                return post.author === filterConfig.author
+            });
         }
-
-        if(filterConfig !== undefined && filterConfig.createdAt !== undefined){
-            postsSegment = postsSegment.filter(function (post) { return post.createdAt===filterConfig.createdAt });
+        if (filterConfig && filterConfig.createdAt) {
+            postsSegment = postsSegment.filter(function(post) {
+                return post.createdAt === filterConfig.createdAt
+            });
         }
-
-
-        postsSegment.sort(function(a,b){return a.createdAt - b.createdAt;});
-
-        return postsSegment.slice(skip||0, skip||0+top||10);
+        postsSegment.sort(function(a, b) {
+            return a.createdAt - b.createdAt;
+        });
+        return postsSegment.slice(skip || 0, skip || 0 + top || 10);
     }
 
-   function getPhotoPost(id) {
-       return(photoPosts.find(function (post) {
-           return post.id===id
-       }))
-   }
+    function getPhotoPost(id) {
+        return (photoPosts.find(function(post) {
+            return post.id === id
+        }))
+    }
 
-
-    function validatePhotoPost(photoPost){
-console.log((typeof photoPost.id === 'string') && (photoPost.id!=='') && (photoPosts.find(function (value) { return value.id.localeCompare(photoPost.id) })===undefined)
-    &&
-    (typeof photoPost.description === 'string' &&photoPost.descriprion.length < 200)
-    &&
-    (photoPost.createdAt && Object.prototype.toString.call(photoPost.createdAt) === "[object Date]" && !isNaN(photoPost.createdAt))//&& typeof photoPost.createdAt === Date
-    &&
-    (typeof photoPost.author === 'string' && photoPost.author!=='')
-    &&
-    (typeof photoPost.photoLink === 'string' && photoPost.photoLink!==''))
-
-       if( (typeof (photoPost.id) === 'string')&& (photoPost.id!=='') && (photoPosts.find(function (value) { return value.id.localeCompare(photoPost.id) })===undefined)
+    function validatePhotoPost(photoPost) {
+        let validateInfo = (typeof photoPost.id === 'string') && (photoPost.id !== '') && (photoPosts.find(function(value) {
+                return value.id.localeCompare(photoPost.id) === 0
+            }) === undefined) &&
+            (typeof photoPost.description === 'string' && photoPost.description.length < 200) &&
+            (photoPost.createdAt && Object.prototype.toString.call(photoPost.createdAt) === "[object Date]" && !isNaN(photoPost.createdAt)) //&& typeof photoPost.createdAt === Date
             &&
-            (typeof (photoPost.description) === 'string' &&photoPost.descriprion.length < 200)
-           &&
-            (photoPost.createdAt && Object.prototype.toString.call(photoPost.createdAt) === "[object Date]" && !isNaN(photoPost.createdAt))//&& typeof photoPost.createdAt === Date
-           &&
-            (typeof (photoPost.author) === 'string' && photoPost.author!=='')
-           &&
-            (typeof (photoPost.photoLink) === 'string' && photoPost.photoLink!=='')){
-    return true;
-       }
+            (typeof photoPost.author === 'string' && photoPost.author !== '') &&
+            (typeof photoPost.photoLink === 'string' && photoPost.photoLink !== '')
+        console.log(validateInfo)
+        console.log(typeof photoPost.description)
+        if (validateInfo) {
+            return true;
+        }
         return false;
     }
 
-    function addPhotoPost(photoPost){
-       if(validatePhotoPost(photoPost) === false){
-           console.log('wrong')
-           return -1;
-       }
-       else{
-           //photoPosts.push(photoPost);
-           //photoPosts.sort(function(a,b){return a.createdAt - b.createdAt;});
-           if(photoPosts.length===0 || photoPost.createdAt > photoPosts[photoPosts.length-1].createdAt){
-               photoPosts.push(photoPost)
-               return photoPosts.length-1;
-           }
-           else{
-               for(i=0;i<photoPosts.length;++i){
-                   if(photoPost.createdAt <= photoPosts[i].createdAt){
-                       photoPosts.splice(i+1,0,photoPost)
-                       break
-                   }
-               }
-               return i+1;
-           }
-
-
-
-       }
-    }
-
-
-    function editPhotoPost(id, photoPost){
-
-
-           var postToEdit = getPhotoPost(id)
-        if(postToEdit === undefined){
-               return false
+    function addPhotoPost(photoPost) {
+        if (!validatePhotoPost(photoPost)) {
+            console.log('wrong')
+            return -1;
+        } else {
+            if (photoPosts.length === 0 || photoPost.createdAt > photoPosts[photoPosts.length - 1].createdAt) {
+                photoPosts.push(photoPost)
+                return photoPosts.length - 1;
+            } else {
+                let i = 0;
+                for (; i < photoPosts.length; ++i) {
+                    if (photoPost.createdAt <= photoPosts[i].createdAt) {
+                        photoPosts.splice(i + 1, 0, photoPost)
+                        break
+                    }
+                }
+                return i + 1;
+            }
         }
-           if(typeof photoPost.description === 'string'){
-               postToEdit.description = photoPost.description
-           }
+    }
 
-           if(typeof photoPost.photoLink === 'string'){
-               postToEdit.photoLink = photoPost.photoLink
-           }
-           photoPosts.splice(photoPosts.indexOf(getPhotoPost(id)),1,postToEdit)
-           return true;
+
+    function editPhotoPost(id, photoPost) {
+        const postToEdit = getPhotoPost(id)
+        if (postToEdit === undefined) {
+            return false
+        }
+        if (typeof photoPost.description === 'string') {
+            postToEdit.description = photoPost.description
+        }
+
+        if (typeof photoPost.photoLink === 'string') {
+            postToEdit.photoLink = photoPost.photoLink
+        }
+        photoPosts.splice(photoPosts.indexOf(getPhotoPost(id)), 1, postToEdit)
+        return true;
 
     }
 
-    function removePhotoPost(id)
-    {
-        photoPosts.splice(photoPosts.findIndex(function (value) { return value.id === id }),1)
+    function removePhotoPost(id) {
+        photoPosts.splice(photoPosts.findIndex(function(value) {
+            return value.id === id
+        }), 1)
         return true;
     }
-//Events
-    function removeEvent(event) {
-        var id = event.target.parentElement.parentElement.getAttribute('postId')
-        remove(id)
-        show()//Appropriate(3)
-        //need to change show
+
+    return {
+        getPhotoPosts: getPhotoPosts,
+        getPhotoPost: getPhotoPost,
+        validatePhotoPost: validatePhotoPost,
+        addPhotoPost: addPhotoPost,
+        editPhotoPost: editPhotoPost,
+        removePhotoPost: removePhotoPost,
+        photoPosts: photoPosts
+
     }
-    
-    
+})();
+
+var lizzyDOM = (function() {
+    photoPosts = lizzy.photoPosts
+
+    //addPost helper functions
+    function createPostInfo(photoPost) {
+        const postInfo = document.createElement('div')
+        postInfo.className = "post-info"
+        postInfo.innerHTML = `
+    <span> ${photoPost.author}</span>
+    <span> ${photoPost.createdAt.getDay().toString()+'.'+photoPost.createdAt.getMonth().toString()+' '+
+    photoPost.createdAt.getHours().toString()+':'+photoPost.createdAt.getMinutes().toString()}
+    </span>
+    `
+        return postInfo
+    }
+
+    function createPostImage(photoPost) {
+        const postImage = document.createElement('img')
+        postImage.className = "photo"
+        postImage.setAttribute('src', photoPost.photoLink)
+        return postImage
+    }
+
+    function createPostReaction(photoPost) {
+        const postReaction = document.createElement('div')
+        postReaction.innerHTML = `
+    <button class="like">
+        <i class="far fa-heart"> </i>
+    </button>
+    <textarea disabled=true> #hashtags</textarea>
+    <div>
+        <textarea disabled=true>${photoPost.description} </textarea>
+    </div>
+    `
+        return postReaction
+    }
+
+    function createEditAndDeleteButtons(postInfo, photoPost) {
+        if (photoPost.author.localeCompare(user) === 0) {
+            const editButton = document.createElement('button')
+            editButton.innerHTML = `
+    <i class="fas fa-pencil-alt"></i>
+    `
+            postInfo.insertBefore(editButton, postInfo.firstChild.nextSibling.nextSibling)
+
+
+            const deleteButton = document.createElement('button')
+            deleteButton.innerHTML = `
+    <i class="fas fa-times"></i>
+    `
+            postInfo.insertBefore(deleteButton, postInfo.firstChild.nextSibling.nextSibling.nextSibling)
+        }
+    }
+
     //DOM
     function addPost(id, position) {
-        var photoPost = getPhotoPost(id)
-        if(photoPost!==undefined){
-            var post = document.createElement('div')
+        const photoPost = lizzy.getPhotoPost(id)
+        if (photoPost) {
+            const post = document.createElement('div')
             post.className = "post"
             post.setAttribute('postId', id)
 
-            var postInfo = document.createElement('div')
-            postInfo.className = "post-info"
+            const postInfo = createPostInfo(photoPost)
+            //delete and edit buttons in postInfo if necessary
+            createEditAndDeleteButtons(postInfo, photoPost)
+            const postImage = createPostImage(photoPost)
+            const postReaction = createPostReaction(photoPost)
 
-            var spanAuthor = document.createElement('span')
-            spanAuthor.textContent = photoPost.author
-            postInfo.appendChild(spanAuthor)
-
-            if(photoPost.author.localeCompare(user)===0 ){
-                var editButton = document.createElement('button')
-                var editIcon = document.createElement('i')
-                editIcon.className = "fas fa-pencil-alt"
-                editButton.appendChild(editIcon)
-                postInfo.appendChild(editButton)
-
-
-                var deleteButton = document.createElement('button')
-                deleteButton.addEventListener('click',removeEvent)
-                var deleteIcon = document.createElement('i')
-                deleteIcon.className = "fas fa-times"
-                deleteButton.appendChild(deleteIcon)
-                postInfo.appendChild(deleteButton)
-            }
-
-            var spanDate = document.createElement('span')
-            spanDate.textContent = photoPost.createdAt.getDay().toString()+'.'+photoPost.createdAt.getMonth().toString()+' '+photoPost.createdAt.getHours().toString()+':'+photoPost.createdAt.getMinutes().toString()
-
-            /*if(user!==null) {
-                 postInfo.appendChild(editButton)
-                postInfo.appendChild(deleteButton)
-            }*/
-
-            postInfo.appendChild(spanDate)
+            //forming post
             post.appendChild(postInfo)
-
-            var image = document.createElement('img')
-            image.className = "photo"
-            image.setAttribute('src', photoPost.photoLink)
-            post.appendChild(image)
-
-            var postReaction = document.createElement('div')
-
-            var likeButton = document.createElement('button')
-            likeButton.className = "like"
-            var likeIcon = document.createElement('i')
-            likeIcon.className = "far fa-heart"
-            likeButton.appendChild(likeIcon)
-
-            var hashtags = document.createElement('textarea')
-            hashtags.disabled = true
-            hashtags.innerText = '#hashtags'
-
-            var div = document.createElement('div')
-            var description = document.createElement('textarea')
-            description.disabled = true
-            description.innerText = photoPost.description
-            div.appendChild(description)
-            postReaction.appendChild(likeButton)
-            postReaction.appendChild(hashtags)
-            postReaction.appendChild(div)
-
+            post.appendChild(postImage)
             post.appendChild(postReaction)
 
-
-
-            var childToAppendBefore = postsSection.firstChild
-            if(position!==undefined){
-                for(i=1;i<position;++i){
+            //adding post to right place
+            let childToAppendBefore = postsSection.firstChild
+            if (position) {
+                for (let i = 1; i < position; ++i) {
                     childToAppendBefore = childToAppendBefore.nextSibling
                 }
-            }
-            else if(childToAppendBefore!==null){
-                while(childToAppendBefore!==null && getPhotoPost(childToAppendBefore.getAttribute('postId')).createdAt < getPhotoPost(post.getAttribute('postId')).createdAt){
+            } else if (childToAppendBefore !== null) {
+                while (childToAppendBefore !== null && lizzy.getPhotoPost(childToAppendBefore.getAttribute('postId')).createdAt < lizzy.getPhotoPost(post.getAttribute('postId')).createdAt) {
                     childToAppendBefore = childToAppendBefore.nextSibling
                 }
             }
 
             postsSection.insertBefore(post, childToAppendBefore)
-            //return childToAppendBefore
             return true
         }
         return false
@@ -469,12 +458,12 @@ console.log((typeof photoPost.id === 'string') && (photoPost.id!=='') && (photoP
     }
 
     function removePost(position) {
-        if(position > -1 ){
-            var childToRemove = postsSection.firstChild
-            for(i=0;i<position && childToRemove!==null;++i){
+        if (position > -1) {
+            let childToRemove = postsSection.firstChild
+            for (let i = 0; i < position && childToRemove !== null; ++i) {
                 childToRemove = childToRemove.nextSibling
             }
-            if(childToRemove!==null){
+            if (childToRemove !== null) {
                 postsSection.removeChild(childToRemove)
                 return true;
             }
@@ -483,27 +472,19 @@ console.log((typeof photoPost.id === 'string') && (photoPost.id!=='') && (photoP
 
     }
 
-   /* function editPost(id, position, photoPost){
-        editPhotoPost(id, photoPost)
-        removePost(id,position)
-        addPost(id,position)
-    }*/
-
     function showHeader() {
-        if(user!==null){
-            var userName = document.createTextNode(user)
-            var header = document.getElementsByTagName('header')
+        if (user !== null) {
+            const userName = document.createTextNode(user)
+            const header = document.getElementsByTagName('header')
             header[0].insertBefore(userName, header[0].firstChild.nextSibling.nextSibling)
-            //return header[0].firstChild.nextSibling
-            //header[0].appendChild(userName)
             return true
         }
-     return false
+        return false
     }
 
     function showAddButton() {
-        if(user!==null){
-            var addButton = document.createElement('button')
+        if (user !== null) {
+            const addButton = document.createElement('button')
             addButton.className = "add-button"
             addButton.innerText = "Add new photo!"
             document.body.insertBefore(addButton, document.getElementById("search-panel"))
@@ -514,75 +495,68 @@ console.log((typeof photoPost.id === 'string') && (photoPost.id!=='') && (photoP
 
     //DOM + JS
     function show() {
-        photoPosts.sort(function(a,b){return a.createdAt - b.createdAt;});
-        for(i=0;i<10 && i<photoPosts.length;++i){
-            addPost(photoPosts[i].id)
+        lizzy.photoPosts.sort(function(a, b) {
+            return a.createdAt - b.createdAt;
+        });
+        for (let i = 0; i < 10 && i < lizzy.photoPosts.length; ++i) {
+            addPost(lizzy.photoPosts[i].id)
         }
 
     }
 
-    function showAppropriate(number){//,filterConfig) {
-        var appropriatePosts = getPhotoPosts(0,number)//,filterConfig)
-        for(i=0;i<10;++i){
+    function showAppropriate(number) {
+        const appropriatePosts = lizzy.getPhotoPosts(0, number)
+        for (let i = 0; i < 10; ++i) {
             removePost(i)
         }
-        for(i=0;i<number;++i){
+        for (let i = 0; i < number; ++i) {
             addPost(appropriatePosts[i])
         }
     }
 
     function add(photoPost) {
-        index = addPhotoPost(photoPost)
+        let index = lizzy.addPhotoPost(photoPost)
         console.log(index)
-       if( index <10 && index > -1) //add returns index, add saves increasing order, checks id
-       {
-           addPost(photoPost.id, index)
-           return true
-       }
-       return false
+        if (index < 10 && index > -1) //add returns index, add saves increasing order, checks id
+        {
+            addPost(photoPost.id, index)
+            return true
+        }
+        return false
     }
 
     function remove(id) {
-        console.log(photoPosts.findIndex(function (post){
-            return post.id===id;
+        console.log(photoPosts.findIndex(function(post) {
+            return post.id === id;
         }))
-        console.log(photoPosts[photoPosts.findIndex(function (post){
-            return post.id===id;
+        console.log(photoPosts[photoPosts.findIndex(function(post) {
+            return post.id === id;
         })])
-        removePost(photoPosts.findIndex(function (post){
-           return post.id===id;
+        removePost(photoPosts.findIndex(function(post) {
+            return post.id === id;
         }))
 
-        return removePhotoPost(id)
+        return lizzy.removePhotoPost(id)
     }
 
     function edit(id, photoPost) {
-        editPhotoPost(id, photoPost)
-        removePost(photoPosts.findIndex(function (value) { return value.id===id; }))
-        //addPost(id)
+        lizzy.editPhotoPost(id, photoPost)
+        removePost(photoPosts.findIndex(function(value) {
+            return value.id === id;
+        }))
     }
 
-    return{
-        getPhotoPosts: getPhotoPosts,
-        getPhotoPost: getPhotoPost,
-        validatePhotoPost: validatePhotoPost,
-        addPhotoPost: addPhotoPost,
-        editPhotoPost: editPhotoPost,
-        removePhotoPost: removePhotoPost,
-
-
+    return {
         addPost: addPost,
+        removePost: removePost,
         showHeader: showHeader,
         showAddButton: showAddButton,
-        removePost: removePost,
+
 
         show: show,
+        showAppropriate: showAppropriate,
         add: add,
         remove: remove,
-        edit: edit,
-
-        showAppropriate: showAppropriate
-
+        edit: edit
     }
-
 })();

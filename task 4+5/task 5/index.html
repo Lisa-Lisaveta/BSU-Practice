@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>ShowIt - Main Page</title>
+</head>
+
+<body>
+    <script src="postsFunctions.js"></script>
+
+
+    <header>
+        <span id="logo">ShowIt</span> <button onclick="location.href='authorization.html'"><i class="fas fa-sign-out-alt"></i></button>
+        <hr>
+    </header>
+
+
+    <form id="search-panel">
+        Search by:
+        <br>
+        <input type="checkbox" name="name-field"> <input type="text" name="name" placeholder="name"><br>
+        <input type="checkbox" name="date-field"> <input type="text" name="date" placeholder="date"><br>
+        <input type="checkbox" name="hashtag-field"> <input type="text" name="hashtag" placeholder="hashtag"><br>
+        <input type="submit" value="Go!" class="go-button">
+    </form>
+
+
+    <script>
+        //tests (DOM)
+
+        //var user = null
+        let user = 'Liza'
+
+        lizzyDOM.showHeader()
+        lizzyDOM.showAddButton()
+        //
+        const postsSection = document.createElement('div')
+        document.body.appendChild(postsSection)
+        //
+        lizzyDOM.show()
+
+        console.log(lizzyDOM.remove('18'))
+        console.log(lizzyDOM.add({
+
+            id: '18',
+
+            description: 'Событие в мире искусства',
+
+            createdAt: new Date('2018-02-23T23:00:00'),
+
+            author: 'Роза',
+
+            photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-18.jpg'
+
+        }))
+        lizzyDOM.edit('1', {
+            description: 'Концептуально.'
+        })
+        lizzyDOM.edit('100', {
+            description: "Вау"
+        })
+        lizzyDOM.edit('4', {
+            description: "So beautiful"
+        })
+        console.log(lizzy.photoPosts)
+    </script>
+
+
+    <button class="show-more-button">Show me more</button>
+
+
+    <footer>
+
+        <hr>
+        <p style="display:inline-block">
+            ShowIt
+            <br> 26.02.2018
+        </p>
+
+
+        <p style="display:inline-block; float:right">
+            Lizaveta Manzhulina, FAMCS, BSU, 2 course, group 5
+            <br> l.manzhulina@gmail.com
+        </p>
+
+
+    </footer>
+</body>
+</html>
