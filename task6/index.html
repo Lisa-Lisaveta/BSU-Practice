@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <script src="postsFunctions.js"></script>
+    
 
     <header>
         <span id="logo">ShowIt</span>
@@ -24,34 +24,12 @@
         <input type="checkbox" name="name-field"> <input type="text" name="name" placeholder="name" id="name-search"><br>
         <input type="checkbox" name="date-field"> <input type="text" name="date" placeholder="date(mm dd yyyy)" id="date-search"><br>
         <input type="checkbox" name="hashtag-field"> <input type="text" name="hashtag" placeholder="#hashtag #otherhashtag ..." id="hashtag-search"><br>
-        <input type="button" value="Go!" class="go-button" onclick="lizzy.setFilterConfig()">
+        <input type="button" value="Go!" class="go-button" onclick="lizzyDOM.setFilterConfig()">
     </form>
 
-    <script>
-        var user = JSON.parse(localStorage.getItem("user"))
-        lizzy.showHeader()
-        lizzy.showAddButton()
-
-        document.getElementById("authorization-button").addEventListener('click', inOrOut)
-        function inOrOut() {
-            if (user !== null) {
-                localStorage.removeItem("user")
-                location.href = "index.html"
-            } else {
-                location.href = "authorization.html"
-            }
-        }
-
-        var postsSection = document.createElement('div')
-        document.body.appendChild(postsSection)
-        lizzy.showAppropriate(10)
-        console.log(JSON.parse(localStorage.getItem("photoPosts")))
-    </script>
-
+    <div class="posts-section">
+    </div>
     <button class="show-more-button">Show me more</button>
-    <script>
-        document.getElementsByClassName("show-more-button")[0].addEventListener("click", lizzy.showMore)
-    </script>
 
     <footer>
         <hr>
@@ -65,5 +43,7 @@
             <br> l.manzhulina@gmail.com
         </p>
     </footer>
+    <script src="postsFunctions.js"></script>
+    <script src="indexAction.js"></script>
 </body>
 </html>

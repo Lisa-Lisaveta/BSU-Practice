@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <script src="postsFunctions.js"></script>
+    
 
     <header>
         <span id="logo">ShowIt</span>
@@ -28,18 +28,7 @@
         <input type="button" value="Log in" class="go-button">
     </form>
 
-    <script>
-        document.getElementsByClassName("go-button")[0].addEventListener('click', login)
-        function login() {
-            if (JSON.parse(localStorage.getItem(document.getElementById("username").value)) !== document.getElementById("password").value) {
-                alert("invalid login or password!")
-            } else {
-                localStorage.setItem("user", JSON.stringify(document.getElementById("username").value))
-                location.href = "index.html"
-            }
-
-        }
-    </script>
+    
 
     <footer>
         <hr>
@@ -52,5 +41,7 @@
             <br> l.manzhulina@gmail.com
         </p>
     </footer>
+    <script src="postsFunctions.js"></script>
+    <script src="authorizationAction.js"> </script>
 </body>
 </html>
