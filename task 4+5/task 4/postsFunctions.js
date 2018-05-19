@@ -294,7 +294,7 @@ var lizzy = (function() {
 
     function validatePhotoPost(photoPost) {
         let validateInfo = (typeof photoPost.id === 'string') && (photoPost.id !== '') && (photoPosts.find(function(value) {
-                return value.id.localeCompare(photoPost.id) == 0
+                return value.id.localeCompare(photoPost.id) === 0
             }) === undefined) &&
             (typeof photoPost.description === 'string' && photoPost.description.length < 200) &&
             (photoPost.createdAt && Object.prototype.toString.call(photoPost.createdAt) === "[object Date]" && !isNaN(photoPost.createdAt)) //&& typeof photoPost.createdAt === Date
