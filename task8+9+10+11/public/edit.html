@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>ShowIt - Add/Edit page</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+
+    <header>
+        <span id="logo">ShowIt</span>
+        <button id="authorization-button"><i class="fas fa-sign-out-alt"></i></button>
+        <hr>
+    </header>
+
+    <div class="post">
+        <div class="post-info">
+            <input id="photo-link" placeholder="Put in your photo link">
+            </input>
+        </div>
+        <img src="trees.jpg" class="photo">
+        <div>
+            <textarea name="hashtags" id="hashtags">#hashtag</textarea>
+            <div>
+                <textarea name="description" id="description"> Description</textarea>
+            </div>
+        </div>
+        <button id="add-button">Add</button>
+    </div>
+
+    
+
+    <footer>
+        <hr>
+        <p style="display:inline-block">
+            ShowIt
+            <br> 26.02.2018
+        </p>
+        <p style="display:inline-block; float:right">
+            Lizaveta Manzhulina, FAMCS, BSU, 2 course, group 5
+            <br> l.manzhulina@gmail.com
+        </p>
+    </footer>
+    <script src="serverRequests.js"></script>
+    <script src="lizzyDOM.js"></script>
+    <script src="editAction.js"> </script>
+</body>
+</html>

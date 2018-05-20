@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>ShowIt - Main Page</title>
+</head>
+
+<body>
+    
+
+    <header>
+        <span id="logo">ShowIt</span>
+        <button id="authorization-button"><i class="fas fa-sign-out-alt"></i></button>
+        <hr>
+    </header>
+
+    <form id="search-panel">
+        Search by:
+        <br>
+        <input type="checkbox" name="name-field"> <input type="text" name="name" placeholder="name" id="name-search"><br>
+        <input type="checkbox" name="date-field"> <input type="text" name="date" placeholder="date(mm dd yyyy)" id="date-search"><br>
+        <input type="checkbox" name="hashtag-field"> <input type="text" name="hashtag" placeholder="#hashtag #otherhashtag ..." id="hashtag-search"><br>
+        <input type="button" value="Go!" class="go-button" onclick="lizzyDOM.showAppropriate(0,10,true)">
+    </form>
+
+    <div class="posts-section">
+    </div>
+    <button class="show-more-button">Show me more</button>
+
+    <footer>
+        <hr>
+        <p style="display:inline-block">
+            ShowIt
+            <br> 26.02.2018
+        </p>
+
+        <p style="display:inline-block; float:right">
+            Lizaveta Manzhulina, FAMCS, BSU, 2 course, group 5
+            <br> l.manzhulina@gmail.com
+        </p>
+    </footer>
+    <script src="serverRequests.js"></script>
+    <script src="lizzyDOM.js"></script>
+    <script src="indexAction.js"></script>
+</body>
+</html>
