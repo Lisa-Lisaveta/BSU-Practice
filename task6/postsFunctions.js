@@ -10,6 +10,7 @@ var lizzy = (function() {
     // localStorage.setItem("Liza", JSON.stringify("414141"))
     // localStorage.setItem("Аружан", JSON.stringify("1313"))
     
+
     //JS
     function arrayCompare(fst, snd) {
         if (snd === undefined) {
@@ -212,6 +213,7 @@ var lizzyDOM = (function() {
         localStorage.removeItem("filterConfig")
         localStorage.setItem("filterConfig", JSON.stringify(filterConfig))
         showAppropriate(10)
+
     }
 
 
