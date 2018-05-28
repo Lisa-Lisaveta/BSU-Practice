@@ -1,14 +1,360 @@
 ;
 var lizzy = (function() {
     let photoPosts = [];
-    let filterConfig = {}
+    //let filterConfig = {}
     photoPosts.sort(function(a, b) {
         return new Date(a.createdAt) - new Date(b.createdAt);
     });
 
+    const initialPosts = [
+        
+                {
+        
+                    id: '1',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Аружан',
+        
+                    photoLink: 'http://static.kulturologia.ru/files/u18476/emerging-artists-1.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '2',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T21:00:00'),
+        
+                    author: 'Амели',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-2.jpg',
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '3',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-13T23:20:00'),
+        
+                    author: 'София',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-3.jpg',
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '4',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-01-22T23:00:00'),
+        
+                    author: 'Мари',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-4.jpg',
+                    likes: [],
+        
+                    hashTags: ["#modern", "art"]
+        
+                },
+                {
+        
+                    id: '5',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2017-12-23T23:00:00'),
+        
+                    author: 'Павел',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-5.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '6',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-27T13:10:00'),
+        
+                    author: 'Аркадий',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-6.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '7',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-01-17T23:00:00'),
+        
+                    author: 'Евгений',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-7.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '8',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-03-14T20:00:00'),
+        
+                    author: 'Артур',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-8.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern"]
+        
+                },
+                {
+        
+                    id: '9',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T22:00:00'),
+        
+                    author: 'Анна',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-9.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#art"]
+        
+                },
+                {
+        
+                    id: '10',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-27T23:59:00'),
+        
+                    author: 'Алёна',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-10.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '11',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Liza',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-11.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art", "#beautiful"]
+        
+                },
+                {
+        
+                    id: '12',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Иванов Иван',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-12.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '13',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Liza',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-13.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '14',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Иванов Иван',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-14.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '15',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Иванов Иван',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-15.jpg',
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                }, {
+        
+                    id: '16',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Иванов Иван',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-16.jpeg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '17',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Иванов Иван',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-17.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '18',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Иванов Иван',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-18.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '19',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Liza',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-19.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                },
+                {
+        
+                    id: '20',
+        
+                    description: 'Modern art, 2017',
+        
+                    createdAt: new Date('2018-02-23T23:00:00'),
+        
+                    author: 'Иванов Иван',
+        
+                    photoLink: 'https://static.kulturologia.ru/files/u18476/emerging-artists-20.jpg',
+        
+                    likes: [],
+        
+                    hashTags: ["#modern", "#art"]
+        
+                }
+        
+        
+            ];
+        
+            if (localStorage.getItem("photoPosts") == undefined) {
+                localStorage.setItem("photoPosts", JSON.stringify(initialPosts))
+            }
+
     //registered users
-    // localStorage.setItem("Liza", JSON.stringify("414141"))
-    // localStorage.setItem("Аружан", JSON.stringify("1313"))
+    localStorage.setItem("Liza", JSON.stringify("414141"))
+    //if(localStorage.getItem("Аружан") === undefined)
+    localStorage.setItem("Аружан", JSON.stringify("1313"))
     
 
     //JS
@@ -169,12 +515,16 @@ var lizzy = (function() {
         validatePhotoPost: validatePhotoPost,
         addPhotoPost: addPhotoPost,
         editPhotoPost: editPhotoPost,
-        removePhotoPost: removePhotoPost
+        removePhotoPost: removePhotoPost,
+        //filterConfig: filterConfig
     }
 
 })();
 
 var lizzyDOM = (function() {
+    //let filterConfig = lizzy.filterConfig;
+    // filterConfig = {}
+    //console.log(filterConfig)
     //Events
     function removeEvent(event) {
         let id = event.currentTarget.getAttribute('postId')
@@ -203,13 +553,15 @@ var lizzyDOM = (function() {
     }
 
     function setFilterConfig() {
+        let filterConfig = {}
+         console.log(filterConfig)
         filterConfig.author = document.getElementById("name-search").value
         filterConfig.createdAt = new Date(document.getElementById("date-search").value)
         filterConfig.hashTags = document.getElementById("hashtag-search").value.split(" ").filter(function(elem) {
             return elem !== null && elem.length > 0 && typeof(elem) !== undefined
         })
 
-        // console.log(filterConfig)
+        
         localStorage.removeItem("filterConfig")
         localStorage.setItem("filterConfig", JSON.stringify(filterConfig))
         showAppropriate(10)

@@ -25,7 +25,7 @@ function addPost() {
                 const photoPost = JSON.parse(localStorage.getItem("postToEdit"));
                 photoPost.author = JSON.parse(localStorage.getItem("user"))
                 photoPost.description = document.getElementById("description").value
-                photoPost.photoLink = "trees.jpg"
+                photoPost.photoLink = "pictures/trees.jpg"
 
                 localStorage.removeItem("postToEdit")
                 localStorage.setItem("postToEdit", JSON.stringify(photoPost))
